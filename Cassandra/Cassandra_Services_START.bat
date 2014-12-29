@@ -1,0 +1,4 @@
+net start DataStax_Cassandra_Community_Server
+net start DataStax_OpsCenter_Community
+net start DataStax_OpsCenter_Agent
+

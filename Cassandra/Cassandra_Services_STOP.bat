@@ -1,0 +1,3 @@
+net stop DataStax_OpsCenter_Agent
+net stop DataStax_OpsCenter_Community
+net stop DataStax_Cassandra_Community_Server
