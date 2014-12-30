@@ -1,0 +1,29 @@
+*** Riak Demo Environment Set-Up ***
+To be documented in greater detail (and possibly scripted) as and when I have time
+
+ON LINUX VM (SERVER):
+
+NB: For steps 1-6, see here - http://docs.basho.com/riak/latest/quickstart/ -
+and further links provided from that page.
+
+1) Install all prerequisites for Erlang and Riak via Yum (TO DO - document and script full list).
+2) Install and build Erlang.
+	If on Centos, may need to add a flag setting to ~/.kerlrc (export CFLAGS="-DOPENSSL_NO_EC=1")
+	- see https://github.com/taylor/kiex/issues/7
+	This is documented as part of the Riak instructions
+	(http://docs.basho.com/riak/latest/ops/building/installing/erlang/)
+	but I missed it on first read-through...
+3) Install Riak.
+4) Install Riak dev cluster.
+5) Start all nodes (script is provided in GitHub repo under Riak/server/SetUp/).
+6) Join all nodes to cluster (script is provided in GitHub repo under Riak/server/SetUp/).
+7) Switch VM to host-only networking (will it work using NAT? - need to check) and identify IP address.
+8) Using system-config-firewall, add a rule allowing allow inbound connections to the VM on each of the ports used by Riak nodes.
+9) Alter riak.conf for each node so that listener.http.internal = 0.0.0.0:<PORT NUMBER>
+(rather than 127.0.0.1:<PORT NUMBER>, which will allow connections on loopback [localhost] only).
+10) Stop and restart all nodes, then verify that can be connected to over HTTP (browser connection will do)
+	from host machine (i.e. Windows client).
+
+ON WINDOWS HOST (CLIENT):
+
+(TO DO)
