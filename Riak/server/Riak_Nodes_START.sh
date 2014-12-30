@@ -6,3 +6,4 @@ do
 	echo Starting node $node
 	$node/bin/riak start
 done
+
