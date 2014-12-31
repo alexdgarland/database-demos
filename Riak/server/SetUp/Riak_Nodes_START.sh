@@ -1,5 +1,5 @@
 #!/bin/bash
-RIAKDEVPATH=~/riak-2.0.2/dev/
+RIAKDEVPATH=~/riak-1.4.1/dev/
 
 for node in $RIAKDEVPATH*;
 do
