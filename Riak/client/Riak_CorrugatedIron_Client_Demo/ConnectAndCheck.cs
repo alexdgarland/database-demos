@@ -7,7 +7,7 @@ namespace Riak_CorrugatedIron_Client_Demo
     {
         static IRiakClient Connect()
         {
-            Console.WriteLine("Connecting to Riak Cluster...");
+            Console.Write("Connecting to Riak Cluster...  ");
             var cluster = RiakCluster.FromConfig("riakConfig");     // Initialise cluster details from App.config
             var client = cluster.CreateClient();                    // Connect a client to the cluster
             Console.WriteLine("OK");
@@ -16,7 +16,7 @@ namespace Riak_CorrugatedIron_Client_Demo
 
         static void CheckClient(IRiakClient client)
         {
-            Console.Write("Pinging Riak...  ");
+            Console.Write("Pinging Riak Cluster...  ");
             var pingResult = client.Ping();
             if (pingResult.IsSuccess)
             {

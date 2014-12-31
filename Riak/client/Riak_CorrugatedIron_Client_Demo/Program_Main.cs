@@ -1,5 +1,8 @@
 ﻿using CorrugatedIron;
 using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading;
 
 namespace Riak_CorrugatedIron_Client_Demo
 {
@@ -9,9 +12,20 @@ namespace Riak_CorrugatedIron_Client_Demo
         {
             try
             {
+
+                Console.WriteLine("\n*** Simple demo of .NET Riak Client \"CorrugatedIron\" ***\n");
+
                 IRiakClient client = Connect();
-                Console.WriteLine("Getting message...");
-                Console.WriteLine(GetDemoMessage(client));
+                CheckClient(client);
+
+                Console.WriteLine("\nGetting message...\n");
+                Console.WriteLine("\"" + GetDemoMessage(client) + "\"");
+
+                Console.WriteLine("\nGetting Riak logo image...\n");
+                String tempFilePath = GetImage(client, fileName: "RiakLogo.jpg");
+                ShowImage(tempFilePath);
+                File.Delete(tempFilePath);
+
             }
             catch (Exception e)
             {
@@ -19,8 +33,17 @@ namespace Riak_CorrugatedIron_Client_Demo
             }
             finally
             {
+                Console.Write("\nDONE - Hit return to exit.");
                 Console.ReadLine();
             }
+        }
+
+        static void ShowImage(String filePath)
+        {
+            Process process = new Process();
+            process.StartInfo.FileName = filePath;
+            process.Start();
+            process.WaitForExit();
         }
 
     }
