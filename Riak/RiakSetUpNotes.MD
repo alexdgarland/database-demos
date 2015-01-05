@@ -9,7 +9,7 @@ and further links provided from that page.
 ACTUALLY - this should be Riak 1.4 (at latest) to use with CorrugatedIron.  So link is:
 http://docs.basho.com/riak/1.4.1/quickstart/
 
-1) Install all prerequisites for Erlang and Riak via Yum - [scripted here](/Riak/server/SetUp/Get_Riak_Erlang_Dependencies.sh).
+1) Install all prerequisites for Erlang and Riak via Yum - [scripted here](/Riak/server/SetUp/Get_Riak_Erlang_Dependencies.sh).  Note that at this stage the installing user needs to have high sudo permissions - this is probably best set up manually as "step 0".
 
 2) Install and build Erlang.
 	If on Centos, may need to add a flag setting to ~/.kerlrc (export CFLAGS="-DOPENSSL_NO_EC=1")
