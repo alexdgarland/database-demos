@@ -39,11 +39,6 @@ namespace Riak_CorrugatedIron_Client_Demo
             }
         }
 
-
-
-
-
-
     }
 
 }
