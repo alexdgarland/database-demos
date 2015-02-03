@@ -12,7 +12,7 @@ namespace CassandraSharp_Client_Demo
         static void Main(string[] args)
         {
 
-
+            RawCQLDemo.Run();
 
         }
     }
