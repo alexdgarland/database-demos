@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DatabaseDemo.Shared
+namespace Riak_CorrugatedIron_Client_Demo
 {
 
     public class Address

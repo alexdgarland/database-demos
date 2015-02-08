@@ -1,9 +1,5 @@
 ﻿using System;
-
-// "Corrugated Iron" .NET Client for Riak
 using CorrugatedIron;
-// Shared code with simple Person, Address, Order objects for all demos
-using dds = DatabaseDemo.Shared;
 
 namespace Riak_CorrugatedIron_Client_Demo
 {

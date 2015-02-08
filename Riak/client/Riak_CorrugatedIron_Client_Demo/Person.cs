@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DatabaseDemo.Shared
+namespace Riak_CorrugatedIron_Client_Demo
 {
     public class Person
     {
@@ -20,7 +20,7 @@ namespace DatabaseDemo.Shared
         public string LastName { get; set; }
         public List<Address> Addresses { get; private set; }
 
-        public void AddAddress (Address NewAddress)
+        public void AddAddress(Address NewAddress)
         {
             this.Addresses.Add(NewAddress);
         }
@@ -36,5 +36,14 @@ namespace DatabaseDemo.Shared
             }
             return sb.ToString();
         }
+
+        public static Person GetDefault()
+        {
+            var person = new Person(1234, "Demo", "Person");
+            person.AddAddress(new Address("1 Some Street", "Some Area", "Some Town", "Some County", "PO5 CD1"));
+            person.AddAddress(new Address("20 Some Other Street", "Some Area", "Some Town", "Some County", "PO5 CD2"));
+            return person;
+        }
+
     }
 }

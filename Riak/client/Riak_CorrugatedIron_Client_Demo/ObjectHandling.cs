@@ -1,6 +1,5 @@
 ﻿using CorrugatedIron;
 using CorrugatedIron.Models;
-using DatabaseDemo.Shared;
 using System;
 
 namespace Riak_CorrugatedIron_Client_Demo
@@ -31,7 +30,7 @@ namespace Riak_CorrugatedIron_Client_Demo
         public static void ShowObjectHandling(IRiakClient client)
         {
             Console.WriteLine("\nCreating Default Person ...\n");
-            var person = DatabaseDemo.Shared.Static.GetDefaultPerson();
+            var person = Person.GetDefault();
             Console.WriteLine(person);
 
             Console.WriteLine("\nSaving Serialised Person to Riak ...\n");
