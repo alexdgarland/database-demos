@@ -1,0 +1,8 @@
+CREATE (bob:Customer {name:'Bob'}), (jim:Customer {name:'Jim'}),
+(leedsstore:Store {branch:'Leeds'}),
+(york:City {name:'York'}), (manchester:City {name:'Manchester'}),
+(yorkshire:County {name:'Yorkshire'}), (greatermanchester:County {name:'Greater Manchester'}),
+(bob)-[:SHOPS_AT]->(leedsstore), (jim)-[:SHOPS_AT]->(leedsstore),
+(leedsstore)-[:LOCATED_IN]->(yorkshire),
+(bob)-[:LIVES_IN]->(york), (york)-[:LOCATED_IN]->(yorkshire),
+(jim)-[:LIVES_IN]->(manchester), (manchester)-[:LOCATED_IN]->(greatermanchester);
