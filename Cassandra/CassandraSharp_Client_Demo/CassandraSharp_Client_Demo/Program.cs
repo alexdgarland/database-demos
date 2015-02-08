@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CassandraSharp;
+﻿using CassandraSharp;
+using CassandraSharp.Config;
+using CassandraSharp.CQLPoco;
+using System;
+
 
 namespace CassandraSharp_Client_Demo
 {
@@ -12,7 +11,24 @@ namespace CassandraSharp_Client_Demo
         static void Main(string[] args)
         {
 
-            RawCQLDemo.Run();
+            try
+            {
+                XmlConfigurator.Configure();
+                using (ICluster cluster = ClusterManager.GetCluster("TestCassandra"))
+                {
+
+                    RawCQLDemo.Run(cluster);
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            Console.ReadLine();
+
+
+
 
         }
     }
