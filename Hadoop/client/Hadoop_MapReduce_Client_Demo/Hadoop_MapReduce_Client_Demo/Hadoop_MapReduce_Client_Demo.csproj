@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DemoMapper.cs" />
+    <Compile Include="Mappers.cs" />
     <Compile Include="DemoReducer.cs" />
     <Compile Include="Password.cs" />
     <Compile Include="Program.cs" />

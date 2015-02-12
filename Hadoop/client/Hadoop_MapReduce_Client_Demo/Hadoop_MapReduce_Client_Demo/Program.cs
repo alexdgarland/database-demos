@@ -17,20 +17,22 @@ namespace Hadoop_MapReduce_Client_Demo
     {
         static void Main(string[] args)
         {
-            // Get config.
-            HadoopJobConfiguration config = new HadoopJobConfiguration();
-            //config.InputPath = "/demo/simple/in";
-            //config.OutputFolder = "/demo/simple/out";
+            Environment.SetEnvironmentVariable("HADOOP_HOME", "/usr/bin/hadoop");
+            
+            // Set up config.
+            var config = new HadoopJobConfiguration();
+            config.InputPath = "/user/centosadmin/postcodes.csv";
+            config.OutputFolder = "/user/centosadmin/output";
 
             // Get credentials, set up a connection to the Hadoop cluster.
             string linuxUser = "centosadmin";
             string linuxPW = Password.Get(linuxUser);
             IHadoop cluster = Hadoop.Connect(new Uri("http://linuxvm"), linuxUser, linuxPW);
 
-            /*
             // Execute MapReduce job
-            MapReduceResult mrResult = cluster.MapReduceJob.Execute<DemoMapper, DemoReducer>(config);
+            MapReduceResult mrResult = cluster.MapReduceJob.Execute<PostcodeDistrictCountMapper, CountReducer>(config);
 
+            /*
             //write job result to console
             int exitCode = jobResult.Info.ExitCode;
             string exitStatus = "Failure";

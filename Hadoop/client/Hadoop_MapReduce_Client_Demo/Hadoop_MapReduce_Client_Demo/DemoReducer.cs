@@ -7,24 +7,20 @@ using Microsoft.Hadoop.MapReduce;
 
 namespace Hadoop_MapReduce_Client_Demo
 {
-    public class DemoReducer : ReducerCombinerBase
+    public class CountReducer : ReducerCombinerBase
     {
 
         public override void Reduce(string key, IEnumerable<string> values, ReducerCombinerContext context)
         {
-            ////initialize counters
-            //int myCount = 0;
-            //int mySum = 0;
+            // Initialize counter
+            int count = 0;
+            // Add each value
+            foreach (string value in values)
+            {
+                count += int.Parse(value);
+            }
 
-            ////count and sum incoming values
-            //foreach (string value in values)
-            //{
-            //    mySum += int.Parse(value);
-            //    myCount++;
-            //}
-
-            ////output results
-            //context.EmitKeyValue(key, myCount + "\t" + mySum);
+            context.EmitKeyValue(key, count.ToString());
         }
 
     }
