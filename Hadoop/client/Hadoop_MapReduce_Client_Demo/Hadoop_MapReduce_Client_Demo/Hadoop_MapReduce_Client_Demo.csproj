@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,12 +31,14 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Hadoop.MapReduce, Version=0.12.5126.42915, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Hadoop.MapReduce.0.12.5126.42915\lib\net40\Microsoft.Hadoop.MapReduce.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Hadoop.WebClient">
+    <Reference Include="Microsoft.Hadoop.WebClient, Version=0.12.5126.42915, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Hadoop.MapReduce.0.12.5126.42915\lib\net40\Microsoft.Hadoop.WebClient.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Management.HDInsight.Framework.Experimental">
