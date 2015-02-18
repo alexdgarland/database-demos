@@ -5,6 +5,9 @@
 Hadoop/server/data/*.csv
 Hadoop/server/data/*.zip
 
+# Non-source Java files
+*.class
+*.jar
 
 # *** STANDARD VISUAL STUDIO GITIGNORE TEMPLATE: ***
 
