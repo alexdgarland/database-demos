@@ -2,8 +2,8 @@
 *~
 
 # Raw data download for Hadoop MapReduce demo
-Hadoop/server/data/*.csv
-Hadoop/server/data/*.zip
+*/data/*.csv
+*/data/*.zip
 
 # Non-source Java files
 *.class
