@@ -19,7 +19,6 @@ elif [ $1 = "sample" ] ; then
     echo "*** Displaying sample of input data in HDFS: ***"
     hadoop fs -cat $dfsdatapath | head
 
-fi
 else
 
     printf "ERROR: Argument missing or not recognised (should be \"del\"/\"delete\", \"put\" or \"sample\").\n"

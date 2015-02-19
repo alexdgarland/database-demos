@@ -1,3 +1,5 @@
+package Jobs;
+
 import java.io.IOException;
 
 // Generic MapReduce stuff
@@ -8,22 +10,22 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.Mapper;
 
-// Specific mapper and reducer implementations
-import AddressPartMappers.PostalDistrictMapper;
 import Reducers.IntSumReducer;
 
 
-public class PostalDistrictCount
+public class AddressPartCountJob
 {
 
-    public static void main(String[] args) throws Exception
+    public static void Run (Class JarClass, Class<? extends Mapper> MapperClass, String JobName, String[] args)
+        throws IOException, InterruptedException, ClassNotFoundException
     {
         Configuration conf = new Configuration();
-        Job job = Job.getInstance(conf, "Postal district count");
+        Job job = Job.getInstance(conf, JobName);
 
-        job.setJarByClass(PostalDistrictCount.class);
-        job.setMapperClass(PostalDistrictMapper.class);
+        job.setJarByClass(JarClass);
+        job.setMapperClass(MapperClass);
         job.setCombinerClass(IntSumReducer.class);
         job.setReducerClass(IntSumReducer.class);
         job.setOutputKeyClass(Text.class);
