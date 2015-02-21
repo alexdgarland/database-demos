@@ -16,7 +16,8 @@ function HandleAction
         
         echo "*** Deleting output directory (if exists) ***"
         hadoop fs -rm -r $dfsoutpath/
-        echo "*** Running MapReduce job ***"
+        
+        echo "*** Running MapReduce job \"$mainclass\" ***"
         hadoop jar $callingscriptdir/AddressPartCounts.jar Jobs.$mainclass $dfsinpath/ $dfsoutpath/
 
     elif [ $action = "view" ] ; then
