@@ -20,7 +20,7 @@ namespace CassandraSharp_Client_Demo
             cmd.Execute(insertCQL).AsFuture().Wait();
 
 
-            string selectCQL = "SELECT * FROM databasedemos.Persons;";
+            string selectCQL = "SELECT PersonID, FirstName, LastName FROM databasedemos.Persons;";
             
             Console.WriteLine("Retrieving person using raw CQL statement:\n\n{0}\n", selectCQL);
                     
