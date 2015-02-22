@@ -2,6 +2,7 @@ package AddressPartMappers;
 
 public class WardMapper extends AbstractAddressPartMapper
 {
+    @Override
     String _getKeyFromColumns(String[] columns)
     {
         // Get ward from ninth column and strip quotes

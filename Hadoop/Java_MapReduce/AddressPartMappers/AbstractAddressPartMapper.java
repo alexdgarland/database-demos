@@ -10,6 +10,7 @@ abstract class AbstractAddressPartMapper extends Mapper<Object, Text, Text, IntW
     private final static IntWritable one = new IntWritable(1);
     private Text key = new Text();
 
+    @Override
     public void map (Object key, Text value, Context context) throws IOException, InterruptedException
     {
         String line = value.toString();
