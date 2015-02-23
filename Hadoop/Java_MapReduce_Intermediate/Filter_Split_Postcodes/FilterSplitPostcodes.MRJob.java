@@ -35,7 +35,7 @@ public class FilterSplitPostcodes
         // - Link it all together and prepare to demo!
 
         // Also:
-        //  - Unit Test
+        //  - Unit Test (especially given that country/ county created easy source of error)
         //  - Use better IDE/ build tool!
 
         // job.setReducerClass(FilterSplitReducer.class);
@@ -63,8 +63,14 @@ public class FilterSplitPostcodes
             String terminatedDate = columns[15];
             if (terminatedDate.equals('')
             {
+                // Set key
                 String country = columns[11];
                 String county = columns[6];
+                String district = columns[7];
+                key.set(country, county, district);
+                
+                // Emit key, plus unchanged value
+                context.emit(key, value);
             }
         }
 
@@ -103,20 +109,27 @@ public class FilterSplitPostcodes
             return this._county;
         }
 
+        public String getDistrict()
+        {
+            return this._district;
+        }
+
         // Implement read-write operations
 
         public void write(DataOutput out)
             throws IOException
         {
-            out.writeChars(Country);
-            out.writeChars(County);
+            out.writeChars(this._country);
+            out.writeChars(this._county);
+            out.writeChars(this._district);
         }
 
         public void readFields(DataInput in)
             throws IOException
         {
-            Country = in.readChars();
-            County = in.readChars();
+            this._country = in.readChars();
+            this._county = in.readChars();
+            this._district = in.readChars();
         }
 
         // TO DO: Implement comparison operations
