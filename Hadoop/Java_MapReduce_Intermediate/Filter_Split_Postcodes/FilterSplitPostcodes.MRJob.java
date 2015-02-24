@@ -26,16 +26,15 @@ public class FilterSplitPostcodes
 
         /* **** WORK IN PROGRESS **** */ 
         // TO DO:
-        // - Finish Mapper and custom Writable (key) - see below
-        // - Implement customer partitioner to split while maintaining counties as single files.
-        // - Implement reducer - writing out to separate filenames per Country-County using MultipleOutputs.
+        // - Implement custom partitioner to split while maintaining counties as single files.
+        // - Implement body of reducer - writing out to separate filenames per Country-County using MultipleOutputs.
         // - Complete Main method to call all the above correctly.
         // - Implement additional MR job which uses pre-partitioned data
         //      to efficiently run stats for one geo area (Yorkshire?) only.
         // - Link it all together and prepare to demo!
 
         // Also:
-        //  - Unit Test (especially given that country/ county created easy source of error)
+        //  - Unit Test (especially given that country/ county creates easy source of error)
         //  - Use better IDE/ build tool!
 
         // job.setReducerClass(FilterSplitReducer.class);
@@ -48,8 +47,9 @@ public class FilterSplitPostcodes
         System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
 
+
     private class FilterSplitMapper
-        extends Mapper<Object, Text, Text, Text>
+        extends Mapper<Object, Text, PostcodeFileSplitKeyWritable, Text>
     {
         PostcodeFileSplitKeyWritable key = new PostcodeFileSplitKeyWritable();
 
@@ -57,12 +57,14 @@ public class FilterSplitPostcodes
         public void map (Object key, Text value, Context context)
             throws IOException, InterruptedException
         {
+            
             String[] columns = value.split(",");
             
             // Filter on terminated date (exclude [do not emit] if populated) 
             String terminatedDate = columns[15];
             if (terminatedDate.equals('')
             {
+                
                 // Set key
                 String country = columns[11];
                 String county = columns[6];
@@ -71,6 +73,7 @@ public class FilterSplitPostcodes
                 
                 // Emit key, plus unchanged value
                 context.emit(key, value);
+                
             }
         }
 
@@ -81,13 +84,35 @@ public class FilterSplitPostcodes
 
     }
 
+
+    private class FilterSplitReducer
+        extends Reducer<PostcodeFileSplitKeyWritable, Text, NullWritable, Text>
+    {
+        @Override
+        public void reduce(PostcodeFileSplitKeyWritable key, Iterable<Text> values, Context context)
+            throws IOException, InterruptedException
+        {
+            // TO DO : Implement body; write text values out unaltered
+            //          *** BUT *** split out to different files based on Country-County.
+        }
+    }
+
+
+        private static boolean _isHeader(String line)
+        {
+            return (line.substring(0,8).equals("Postcode"));
+        }
+
+    }
+
+
     private class PostcodeFileSplitKeyWritable
         implements WritableComparable
     {
         // These two fields are the actual "key", i.e. used for comparison operations
         private String _country;
         private String _county;
-        // We include district as I potentially want to use this in customer partitioner
+        // We include district as I potentially want to use this in custom partitioner
         // and is easier to have as a named field here than split out columns again later.
         private String _district;
 
@@ -132,8 +157,29 @@ public class FilterSplitPostcodes
             this._district = in.readChars();
         }
 
-        // TO DO: Implement comparison operations
+        // Implement comparison operations
 
+        @Override
+        public int compareTo(PostcodeFileSplitKeyWritable other)
+        {
+            // Compare by Country and County elements, with Country taking precedence.
+            int CountryCompareResult = this._country.compareTo(other.getCountry());
+            if (CountryCompareResult == 0)
+            {
+                return this._county.compareTo(other.getCounty());
+            }
+            else
+            {
+                return CountryCompareResult; 
+            }
+        }
+
+        @Override
+        public int hashCode()
+        {
+            return (this._country + this._county).hashCode();
+        }
+        
     }
 
 
