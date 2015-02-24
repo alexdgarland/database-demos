@@ -28,7 +28,8 @@ public class FilterSplitPostcodes
         // TO DO:
         // - Implement custom partitioner to split while maintaining counties as single files.
         // - Implement body of reducer - writing out to separate filenames per Country-County using MultipleOutputs.
-        // - Complete Main method to call all the above correctly.
+        // - Complete Main method to call all the above correctly, make sure it builds & runs ...
+        // - Possibly then split classes out into separate .java files.
         // - Implement additional MR job which uses pre-partitioned data
         //      to efficiently run stats for one geo area (Yorkshire?) only.
         // - Link it all together and prepare to demo!
@@ -57,23 +58,21 @@ public class FilterSplitPostcodes
         public void map (Object key, Text value, Context context)
             throws IOException, InterruptedException
         {
-            
-            String[] columns = value.split(",");
-            
-            // Filter on terminated date (exclude [do not emit] if populated) 
-            String terminatedDate = columns[15];
-            if (terminatedDate.equals('')
+            if (!this._isHeader(value))
             {
-                
-                // Set key
-                String country = columns[11];
-                String county = columns[6];
-                String district = columns[7];
-                key.set(country, county, district);
-                
-                // Emit key, plus unchanged value
-                context.emit(key, value);
-                
+                String[] columns = value.split(",");   
+                // Filter on terminated date (exclude [do not emit] if populated) 
+                String terminatedDate = columns[15];
+                if (terminatedDate.equals('')
+                {                
+                    // Set key
+                    String country = columns[11];
+                    String county = columns[6];
+                    String district = columns[7];
+                    key.set(country, county, district);
+                    // Emit key, plus unchanged value
+                    context.emit(key, value);
+                }
             }
         }
 
@@ -95,14 +94,6 @@ public class FilterSplitPostcodes
             // TO DO : Implement body; write text values out unaltered
             //          *** BUT *** split out to different files based on Country-County.
         }
-    }
-
-
-        private static boolean _isHeader(String line)
-        {
-            return (line.substring(0,8).equals("Postcode"));
-        }
-
     }
 
 
