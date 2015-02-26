@@ -9,11 +9,8 @@ import java.io.DataInput;
 public class PostcodeFileSplitKeyWritable
     implements WritableComparable<PostcodeFileSplitKeyWritable>
 {
-    // These two fields are the actual "key", i.e. used for comparison operations
     private String _country;
     private String _county;
-    // We include district as I potentially want to use this in custom partitioner
-    // and is easier to have as a named field here than split out columns again later.
     private String _district;
 
     // Access methods
@@ -62,22 +59,28 @@ public class PostcodeFileSplitKeyWritable
     @Override
     public int compareTo(PostcodeFileSplitKeyWritable other)
     {
-        // Compare by Country and County elements, with Country taking precedence.
+        // Compare by Country, County, District elements (in that order of precedence).
+
         int CountryCompareResult = this._country.compareTo(other.getCountry());
-        if (CountryCompareResult == 0)
-        {
-            return this._county.compareTo(other.getCounty());
-        }
-        else
+        if (CountryCompareResult != 0)
         {
             return CountryCompareResult; 
         }
+
+        int CountyCompareResult = this._county.compareTo(other.getCounty());
+        if (CountyCompareResult != 0)
+        {
+             return CountyCompareResult;
+        }
+
+        return this._district.compareTo(other.getDistrict());
+
     }
 
     @Override
     public int hashCode()
     {
-        return (this._country + this._county).hashCode();
+        return (this._country + "-" + this._county + "-" + this._district).hashCode();
     }
     
 }

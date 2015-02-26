@@ -32,7 +32,8 @@ public class FilterSplitReducer
 
     static String generateFileName(PostcodeFileSplitKeyWritable key)
     {
-        return key.getCountry() + "-" + (key.getCounty().equals("") ? key.getDistrict() : key.getCounty());  
+        String missingCountyDefault = key.getCountry().equals("England") ? "MissingCounty" : key.getDistrict();
+        return key.getCountry() + "-" + missingCountyDefault; //(key.getCounty().isEmpty() ? missingCountyDefault : key.getCounty());  
     }
 }
 
