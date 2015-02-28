@@ -6,6 +6,6 @@ dfsoutpath=/user/$(whoami)/output/postcodesplit
 echo "*** Deleting output directory (if exists) ***"
 hadoop fs -rm -r $dfsoutpath/
 
-echo "*** Running MapReduce job \"$mainclass\" ***"
+echo "*** Running MapReduce job ***"
 hadoop jar $scriptdir/FilterSplitPostcodes.jar FilterSplitPostcodes.FilterSplitPostcodes $dfsinpath/ $dfsoutpath/
 

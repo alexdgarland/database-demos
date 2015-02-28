@@ -36,7 +36,7 @@ public class PostcodeFileSplitKeyWritable
         return this._district;
     }
 
-    // Implement read-write operations
+    // Implement read-write (serialisation) operations
 
     public void write(DataOutput out)
         throws IOException
@@ -49,9 +49,9 @@ public class PostcodeFileSplitKeyWritable
     public void readFields(DataInput in)
         throws IOException
     {
-        this._country = in.readLine();
-        this._county = in.readLine();
-        this._district = in.readLine();
+        this._country = in.readLine().replaceAll("\\W", "");
+        this._county = in.readLine().replaceAll("\\W", "");
+        this._district = in.readLine().replaceAll("\\W", "");
     }
 
     // Implement comparison operations
@@ -82,5 +82,16 @@ public class PostcodeFileSplitKeyWritable
     {
         return (this._country + "-" + this._county + "-" + this._district).hashCode();
     }
-    
+
+    @Override
+    public String toString()
+    {
+        return String.format
+                (
+                "Postcode File Split Key: Country - [%s], County - [%s], District - [%s]"
+                , this._country
+                , this._county
+                , this._district
+                ); 
+   }    
 }
