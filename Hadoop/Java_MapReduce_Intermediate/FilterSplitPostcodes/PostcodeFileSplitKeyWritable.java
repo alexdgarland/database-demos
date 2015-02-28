@@ -28,13 +28,31 @@ public class PostcodeFileSplitKeyWritable
 
     public String getCounty()
     {
+        if (this._county.length() == 0)
+        {
+            return "MissingCounty";
+        }
         return this._county;
     }
 
     public String getDistrict()
     {
+        if (this._district.length() == 0)
+        {
+            return "MissingDistrict";
+        }
         return this._district;
     }
+
+    public String getSubdivision()
+    {
+        if (this._country.equals("England"))
+        {
+            return this.getCounty();
+        }
+        return this.getDistrict();
+    }
+
 
     // Implement read-write (serialisation) operations
 
@@ -60,21 +78,17 @@ public class PostcodeFileSplitKeyWritable
     public int compareTo(PostcodeFileSplitKeyWritable other)
     {
         // Compare by Country, County, District elements (in that order of precedence).
-
-        int CountryCompareResult = this._country.compareTo(other.getCountry());
+        int CountryCompareResult = this.getCountry().compareTo(other.getCountry());
         if (CountryCompareResult != 0)
         {
             return CountryCompareResult; 
         }
-
-        int CountyCompareResult = this._county.compareTo(other.getCounty());
+        int CountyCompareResult = this.getCounty().compareTo(other.getCounty());
         if (CountyCompareResult != 0)
         {
              return CountyCompareResult;
         }
-
-        return this._district.compareTo(other.getDistrict());
-
+        return this.getDistrict().compareTo(other.getDistrict());
     }
 
     @Override
@@ -88,10 +102,8 @@ public class PostcodeFileSplitKeyWritable
     {
         return String.format
                 (
-                "Postcode File Split Key: Country - [%s], County - [%s], District - [%s]"
-                , this._country
-                , this._county
-                , this._district
+                "Postcode File Split Key: Country - \"%s\", County - \"%s\", District - \"%s\"",
+                this.getCountry(), this.getCounty(), this.getDistrict()
                 ); 
    }    
 }
