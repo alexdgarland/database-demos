@@ -35,7 +35,9 @@ public class FilterSplitPostcodes
         job.setJarByClass(FilterSplitPostcodes.class);
 
         job.setMapperClass(FilterSplitMapper.class);
+        job.setPartitionerClass(FilterSplitPartitioner.class);
         job.setReducerClass(FilterSplitReducer.class);
+        job.setNumReduceTasks(3);
         job.setOutputKeyClass(NullWritable.class);
         job.setMapOutputKeyClass(PostcodeFileSplitKeyWritable.class);
         job.setOutputValueClass(Text.class);
