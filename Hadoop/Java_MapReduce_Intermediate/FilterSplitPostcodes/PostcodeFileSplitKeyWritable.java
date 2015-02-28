@@ -16,9 +16,9 @@ public class PostcodeFileSplitKeyWritable
     // Access methods
     public void set(String Country, String County, String District)
     {
-        this._country = Country;
-        this._county = County;
-        this._district = District;
+        this._country = Country.replaceAll("\\W", "");
+        this._county = County.replaceAll("\\W", "");
+        this._district = District.replaceAll("\\W", "");
     }
 
     public String getCountry()
@@ -59,18 +59,19 @@ public class PostcodeFileSplitKeyWritable
     public void write(DataOutput out)
         throws IOException
     {
-        out.writeChars(this._country + '\n');
-        out.writeChars(this._county + '\n');
-        out.writeChars(this._district + '\n');
+        out.writeBytes(this._country + '\n');
+        out.writeBytes(this._county + '\n');
+        out.writeBytes(this._district + '\n');
     }
 
     public void readFields(DataInput in)
         throws IOException
     {
-        this._country = in.readLine().replaceAll("\\W", "");
-        this._county = in.readLine().replaceAll("\\W", "");
-        this._district = in.readLine().replaceAll("\\W", "");
+        this._country = in.readLine();
+        this._county = in.readLine();
+        this._district = in.readLine();
     }
+
 
     // Implement comparison operations
 
@@ -97,6 +98,8 @@ public class PostcodeFileSplitKeyWritable
         return (this._country + "-" + this._county + "-" + this._district).hashCode();
     }
 
+    
+    // Implement toString, mostly for debugging purposes
     @Override
     public String toString()
     {
