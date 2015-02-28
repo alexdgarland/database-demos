@@ -1,7 +1,6 @@
 
 /* **** WORK IN PROGRESS **** */ 
 // TO DO:
-// - Implement custom partitioner to split while maintaining counties as single files.
 // - Implement additional MR job which uses pre-partitioned data
 //      to efficiently run stats for one geo area (Yorkshire?) only.
 // - Link it all together and prepare to demo!
