@@ -1,7 +1,15 @@
 #!/bin/bash
-scriptdir=$(dirname "${BASH_SOURCE[0]}")
+
 # NB: Temporarily (?) removed "-Xlint:unchecked" option
-hadoop com.sun.tools.javac.Main $scriptdir/FilterSplitPostcodes/*.java
-jar cf $scriptdir/FilterSplitPostcodes.jar $scriptdir/FilterSplitPostcodes/*.class
-rm $scriptdir/FilterSplitPostcodes/*.class
+
+scriptdir=$(dirname "${BASH_SOURCE[0]}")
+
+pushd $(pwd) > /dev/null
+cd $scriptdir
+
+hadoop com.sun.tools.javac.Main FilterSplitPostcodes/*.java
+jar cf FilterSplitPostcodes.jar FilterSplitPostcodes/*.class
+rm FilterSplitPostcodes/*.class
+
+popd> /dev/null
 
