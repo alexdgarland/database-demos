@@ -6,23 +6,23 @@ import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.SortedMapWritable;
+import org.apache.hadoop.io.MapWritable;
 import java.util.Map.Entry;
 
 
 public class ConstituencyStatsCombiner
-    extends Reducer<Text, SortedMapWritable, Text, SortedMapWritable>
+    extends Reducer<Text, MapWritable, Text, MapWritable>
 {
 
     @Override
-    public void reduce (Text key, Iterable<SortedMapWritable> values, Context context)
+    public void reduce (Text key, Iterable<MapWritable> values, Context context)
         throws IOException, InterruptedException
     {
-        SortedMapWritable combinedMap = new SortedMapWritable();
+        MapWritable combinedMap = new MapWritable();
         
-        for (SortedMapWritable v : values)
+        for (MapWritable inMap : values)
         {
-            for (Entry<WritableComparable, Writable> entry : v.entrySet())
+            for (Entry<Writable, Writable> entry : inMap.entrySet())
             {
                 IntWritable count = (IntWritable)combinedMap.get(entry.getKey());
                 if (count != null)

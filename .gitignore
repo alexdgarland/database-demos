@@ -8,6 +8,7 @@
 # Non-source Java files
 *.class
 *.jar
+Hadoop/Java_MapReduce_Intermediate/ConstituencyStats/target/
 
 # *** STANDARD VISUAL STUDIO GITIGNORE TEMPLATE: ***
 
