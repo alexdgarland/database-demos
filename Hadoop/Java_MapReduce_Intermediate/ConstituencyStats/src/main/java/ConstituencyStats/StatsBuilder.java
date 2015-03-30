@@ -1,7 +1,6 @@
 package ConstituencyStats;
 
 import org.apache.hadoop.io.Writable;
-import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.MapWritable;
 import org.apache.hadoop.io.IntWritable;
 import java.util.TreeMap;

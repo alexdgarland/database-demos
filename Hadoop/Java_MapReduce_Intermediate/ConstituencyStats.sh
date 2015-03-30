@@ -1,6 +1,6 @@
 
 scriptdir=$(dirname "${BASH_SOURCE[0]}")
-dfsinpath=/user/$(whoami)/output/postcodesplit/Postcodes-Wales-Wrexham*
+dfsinpath=/user/$(whoami)/output/postcodesplit/Postcodes-Wales*
 dfsoutpath=/user/$(whoami)/output/stats
 
 pushd $(pwd) > /dev/null
