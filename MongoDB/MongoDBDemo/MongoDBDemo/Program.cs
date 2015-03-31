@@ -1,16 +1,14 @@
 ﻿
 using System;
-using System.Linq;
 
 // Demo of "Mongo C-Sharp Driver" (officially supported by MongoDB)
 // Get with Nuget - "Install-Package mongocsharpdriver"
 // Using version 1.10.0 (see - http://api.mongodb.org/csharp/1.10/)
 // which is currently the standard and most widely compatible;
 // 2.0 is available but requires >= .NET 4.5
+/// Demos based on http://docs.mongodb.org/ecosystem/tutorial/getting-started-with-csharp-driver/
 
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
-using MongoDB.Driver.Linq;
 
 
 namespace MongoDBDemo
@@ -19,55 +17,42 @@ namespace MongoDBDemo
     {
         static void Main(string[] args)
         {
-            /// Simple demo based on http://docs.mongodb.org/ecosystem/tutorial/getting-started-with-csharp-driver/
-
+            
             // Set up connection
 
             var connectionString = "mongodb://localhost";
             var client = new MongoClient(connectionString);
             var server = client.GetServer();
             var database = server.GetDatabase("test");                          // "test" is the name of the database
-            var collection = database.GetCollection<Customer>("Customers");     // Connect to customer collection
 
+            // Select which demo we want to run
 
-            // Create a customer in memory
+            Console.WriteLine("**** MONGODB DEMO ****\n\n");
+            
+            String response = "";
 
-            Customer c1 = Customer.GetDefault();
-            Console.WriteLine(String.Format("\nInitial Customer:\n\n{0}\n", c1.ToString()));
-            int savedCustomerId = c1.Id;     // Keep a record of the ID
+            while (response.ToUpper() != "Q")
+            {
+                Console.WriteLine("Select an option:\n\n");
+                Console.WriteLine("1 - Basic demo using \"Customer\" object");
+                Console.WriteLine("2 - Changing the schema");
+                Console.WriteLine("\n ... or press Q to quit.\n\n");
 
-
-            // Automaticaly serialize the customer to MongoDB.
-            // In this case, it picks up the fact that we have an "Id" field on the customer;
-            // we can also get it to auto-allocate and return IDs using collection.Insert.
-
-            collection.Save(c1);
-
-
-            // Retrieve the customer details into a new customer object
-
-            var query = Query<Customer>.EQ(c => c.Id, savedCustomerId);
-            Customer c2 = collection.FindOne(query);
-            Console.WriteLine(String.Format("\nRetrieved Customer:\n\n{0}\n", c2.ToString()));
-
-
-            // Send an update of the customer details to MongoDB (add address)
-
-            String newAddress = "25 Some Avenue, Some Town, Somewhere, PO5 CD3";
-            var update = Update<Customer>.AddToSet<String>(c => c.Addresses, newAddress);
-            collection.Update(query, update);               // Note, we can use the same query object to locate our customer record
-
-
-            // Retrieve another copy of the customer with update applied - let's try it with LINQ this time
-
-            Customer c3 = (
-                            from c in collection.AsQueryable<Customer>()
-                            where c.Id == savedCustomerId
-                            select c
-                            ).Single();
-
-            Console.WriteLine(String.Format("\nRetrieved Customer (Updated) via LINQ:\n\n{0}\n", c3.ToString()));
-
+                response = Console.ReadLine();
+                switch (response)
+                {
+                    case "1":
+                        {
+                            Example1.Run(database);
+                            break;
+                        }
+                    case "2":
+                        {
+                            Example2.Run(database);
+                            break;
+                        }
+                }
+            }
         }
     }
 }
