@@ -25,11 +25,7 @@ namespace CassandraSharp_Client_Demo
             {
                 Console.WriteLine(e);
             }
-            Console.ReadLine();
-
-
-
-
+            
         }
     }
 }

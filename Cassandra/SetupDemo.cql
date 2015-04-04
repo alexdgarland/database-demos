@@ -5,11 +5,11 @@ CREATE KEYSPACE DatabaseDemos
     WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
 
     
-DROP TABLE IF EXISTS DatabaseDemos.Persons;
+DROP TABLE IF EXISTS DatabaseDemos.Customers;
 
-CREATE TABLE DatabaseDemos.Persons
+CREATE TABLE DatabaseDemos.Customers
             (
-             PersonID int PRIMARY KEY,
-             FirstName varchar,
-             LastName varchar
+             CustomerID int PRIMARY KEY,
+             Name       varchar,
+             AddressSet set<varchar>
             );
