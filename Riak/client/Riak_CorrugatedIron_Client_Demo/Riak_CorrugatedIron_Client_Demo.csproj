@@ -68,13 +68,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
-    <Compile Include="ConnectAndCheck.cs" />
+    <Compile Include="DemoSetup.cs" />
     <Compile Include="ObjectHandling.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="Program_Main.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleGetRequests.cs" />
+    <Compile Include="GetRequests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -98,6 +96,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Customer\Customer\Customer.csproj">
+      <Project>{d0b0b867-dc6a-47ff-bfee-6b1e19a97196}</Project>
+      <Name>Customer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Shared\DemoRunner\DemoRunner\DemoRunner.csproj">
+      <Project>{419c51f0-8759-49a2-9a12-bb5a81bc07c8}</Project>
+      <Name>DemoRunner</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

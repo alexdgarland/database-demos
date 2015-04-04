@@ -1,6 +1,9 @@
 ﻿
 using System;
 
+using Shared.DemoRunner;
+
+
 // Demo of "Mongo C-Sharp Driver" (officially supported by MongoDB)
 // Get with Nuget - "Install-Package mongocsharpdriver"
 // Using version 1.10.0 (see - http://api.mongodb.org/csharp/1.10/)
@@ -18,41 +21,13 @@ namespace MongoDBDemo
         static void Main(string[] args)
         {
             
-            // Set up connection
+            // Run demos - use shared code to pick which one(s)
 
-            var connectionString = "mongodb://localhost";
-            var client = new MongoClient(connectionString);
-            var server = client.GetServer();
-            var database = server.GetDatabase("test");                          // "test" is the name of the database
+            var runner = new DemoRunner("MongoDB");
+            runner.AddOption("1", "Basic demo using \"Customer\" object", Example1.Run);
+            runner.AddOption("2", "Changing the schema", Example2.Run);
+            runner.Run();
 
-            // Select which demo we want to run
-
-            Console.WriteLine("**** MONGODB DEMO ****\n\n");
-            
-            String response = "";
-
-            while (response.ToUpper() != "Q")
-            {
-                Console.WriteLine("Select an option:\n\n");
-                Console.WriteLine("1 - Basic demo using \"Customer\" object");
-                Console.WriteLine("2 - Changing the schema");
-                Console.WriteLine("\n ... or press Q to quit.\n\n");
-
-                response = Console.ReadLine();
-                switch (response)
-                {
-                    case "1":
-                        {
-                            Example1.Run(database);
-                            break;
-                        }
-                    case "2":
-                        {
-                            Example2.Run(database);
-                            break;
-                        }
-                }
-            }
         }
     }
 }

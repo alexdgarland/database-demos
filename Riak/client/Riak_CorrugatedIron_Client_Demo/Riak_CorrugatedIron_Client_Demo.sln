@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Riak_CorrugatedIron_Client_Demo", "Riak_CorrugatedIron_Client_Demo.csproj", "{1FF50A25-8BC6-4CB9-9CDA-8E21155F60B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer", "..\..\..\Shared\Customer\Customer\Customer.csproj", "{D0B0B867-DC6A-47FF-BFEE-6B1E19A97196}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoRunner", "..\..\..\Shared\DemoRunner\DemoRunner\DemoRunner.csproj", "{419C51F0-8759-49A2-9A12-BB5A81BC07C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{1FF50A25-8BC6-4CB9-9CDA-8E21155F60B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF50A25-8BC6-4CB9-9CDA-8E21155F60B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FF50A25-8BC6-4CB9-9CDA-8E21155F60B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0B0B867-DC6A-47FF-BFEE-6B1E19A97196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0B0B867-DC6A-47FF-BFEE-6B1E19A97196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0B0B867-DC6A-47FF-BFEE-6B1E19A97196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0B0B867-DC6A-47FF-BFEE-6B1E19A97196}.Release|Any CPU.Build.0 = Release|Any CPU
+		{419C51F0-8759-49A2-9A12-BB5A81BC07C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{419C51F0-8759-49A2-9A12-BB5A81BC07C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{419C51F0-8759-49A2-9A12-BB5A81BC07C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{419C51F0-8759-49A2-9A12-BB5A81BC07C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

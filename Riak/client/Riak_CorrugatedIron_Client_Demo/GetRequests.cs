@@ -8,10 +8,26 @@ using System.Text;
 
 namespace Riak_CorrugatedIron_Client_Demo
 {
-    partial class Program
+    class GetRequests
     {
 
-        static String GetDemoMessage(IRiakClient client)
+        public static void Run()
+        {
+
+            IRiakClient client = DemoSetup.GetClient();
+
+            Console.WriteLine("\nGetting message...\n");
+            Console.WriteLine("\"" + GetDemoMessage(client) + "\"");
+
+            Console.WriteLine("\nGetting Riak logo image...\n");
+            String tempFilePath = GetImage(client, fileName: "RiakLogo.jpg");
+            DisplayImage(tempFilePath);
+            File.Delete(tempFilePath);
+
+        }
+
+
+        private static String GetDemoMessage(IRiakClient client)
         {
             // Simple GET based on bucket + key
             var result = client.Get(bucket: "demo", key: "message");
@@ -21,7 +37,7 @@ namespace Riak_CorrugatedIron_Client_Demo
             return Encoding.Default.GetString(result.Value.Value);
         }
 
-        static String GetImage(IRiakClient client, String fileName)
+        private static String GetImage(IRiakClient client, String fileName)
         {
             // Simple GET based on bucket + key
             var result = client.Get(bucket: "demo", key: fileName);
@@ -40,7 +56,7 @@ namespace Riak_CorrugatedIron_Client_Demo
             return tempFilePath;
         }
 
-        static void CheckContentType(RiakResult<CorrugatedIron.Models.RiakObject> result, String expectedType)
+        private static void CheckContentType(RiakResult<CorrugatedIron.Models.RiakObject> result, String expectedType)
         {
             // You either need to be careful about requesting objects with the expected content type,
             // or do some kind of explicit header check - e.g. ...
@@ -52,18 +68,7 @@ namespace Riak_CorrugatedIron_Client_Demo
             }
         }
 
-        static void ShowBasicRequests(IRiakClient client)
-        {
-            Console.WriteLine("\nGetting message...\n");
-            Console.WriteLine("\"" + GetDemoMessage(client) + "\"");
-
-            Console.WriteLine("\nGetting Riak logo image...\n");
-            String tempFilePath = GetImage(client, fileName: "RiakLogo.jpg");
-            DisplayImage(tempFilePath);
-            File.Delete(tempFilePath);
-        }
-
-        static void DisplayImage(String filePath)
+        private static void DisplayImage(String filePath)
         {
             Process process = new Process();
             process.StartInfo.FileName = filePath;

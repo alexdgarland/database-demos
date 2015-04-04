@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MongoDBDemo
+namespace Shared.Customer
 {
-    class NewSchemaCustomer : Customer
+    public class NewSchemaCustomer : Customer
     {
         // We can change the class to have additional fields - represented here by a subclass but could fully replace "Customer".
 
@@ -21,6 +17,7 @@ namespace MongoDBDemo
             return base.ToString()
                 + String.Format("\nNearest Store: {0}", this.NearestStore == "" ? this.NearestStore : "Not Known");
         }
-
+    
     }
+
 }
