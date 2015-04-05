@@ -1,21 +1,16 @@
-﻿
-using System;
-using System.Linq;
+﻿using System;
 
 using Shared.Customer;
 
 using CassandraSharp;
-using CassandraSharp.CQLPoco;
 
 namespace CassandraSharp_Client_Demo
 {
-    class RawCQLDemo
+    class Example1 : CassandraDemoExample
     {
-        public static void Run(ICluster cluster)
+
+        public static void _runExample(ICqlCommand cmd)
         {
-
-            ICqlCommand cmd = cluster.CreatePocoCommand();
-
 
             // Create a customer in memory
 
@@ -46,8 +41,13 @@ namespace CassandraSharp_Client_Demo
             c2 = CassandraCustomer.RetrieveCustomer(cmd, savedCustomerID);
             Console.WriteLine(String.Format("\nRetrieved Customer (after adding new address):\n\n{0}\n", c2.ToString()));
 
-
         }
+
+        public static void Run()
+        {
+            RunAction(_runExample);
+        }
+
     }
 
 }

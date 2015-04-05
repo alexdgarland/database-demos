@@ -1,7 +1,5 @@
-﻿using CassandraSharp;
-using CassandraSharp.Config;
-using CassandraSharp.CQLPoco;
-using System;
+﻿
+using Shared.DemoRunner;
 
 
 namespace CassandraSharp_Client_Demo
@@ -11,20 +9,10 @@ namespace CassandraSharp_Client_Demo
         static void Main(string[] args)
         {
 
-            try
-            {
-                XmlConfigurator.Configure();
-                using (ICluster cluster = ClusterManager.GetCluster("TestCassandra"))
-                {
+            var runner = new DemoRunner("Cassandra (CassandraSharp Client)");
+            runner.AddOption("1", "Basic demo of saving, retrieving and updating objects.", Example1.Run);
 
-                    RawCQLDemo.Run(cluster);
-
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            runner.Run();
             
         }
     }

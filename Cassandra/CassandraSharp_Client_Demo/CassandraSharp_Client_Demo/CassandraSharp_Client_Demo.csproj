@@ -64,7 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CassandraCustomer.cs" />
-    <Compile Include="RawCQLDemo.cs" />
+    <Compile Include="CassandraDemoExample.cs" />
+    <Compile Include="Example1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
