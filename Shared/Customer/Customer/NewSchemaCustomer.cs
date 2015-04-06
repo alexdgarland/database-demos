@@ -8,8 +8,9 @@ namespace Shared.Customer
 
         public String NearestStore;
 
-        // When we retrieve an old-style customer from MongoDB,
-        // "NearestStore" will be an empty string but code will not fail or set to null.
+        // When we retrieve an old-style customer from our various data stores,
+        // "NearestStore" will be either null or an empty string,
+        // but code should not fail for most of these data stores.
         // If we want, we can put in simple code (e.g. see below) to expect the change.
 
         public override string ToString()
