@@ -8,7 +8,15 @@ using CassandraSharp;
 
 namespace CassandraSharp_Client_Demo
 {
-    class CassandraCustomer : Customer
+
+    /*
+    Add Cassandra operations for "new schema" version of Customer. 
+     
+    Because we're simulating changes to code over time, we have to repeat all this boilerplate.
+    With "real" code changes we wouldn't have to, we would just update the existing code.
+    */
+
+    class NewSchemaCassandraCustomer : NewSchemaCustomer
     {
         /* Handle saving to Cassandra using CQL and CassandraSharp driver */
 
@@ -20,13 +28,14 @@ namespace CassandraSharp_Client_Demo
             */
             return String.Format
                 (
-                "INSERT INTO databasedemos.Customers (CustomerID, Name, AddressSet) "
-                + "\nVALUES ({0}, '{1}', {{{2}}});",
+                "INSERT INTO databasedemos.Customers (CustomerID, Name, AddressSet, NearestStore) "
+                + "\nVALUES ({0}, '{1}', {{{2}}}, '{3}');",
                 this.CustomerID,
                 this.Name,
                 this.Addresses
                     .Select(a => "'" + a + "'")
-                    .Aggregate((a, b)=> a + "," + b)
+                    .Aggregate((a, b) => a + "," + b),
+                this.NearestStore
                 );
         }
 
@@ -42,19 +51,19 @@ namespace CassandraSharp_Client_Demo
         {
             return String.Format
                 (
-                "SELECT CustomerID, Name, AddressSet FROM databasedemos.Customers "
+                "SELECT CustomerID, Name, AddressSet, NearestStore FROM databasedemos.Customers "
                 + "WHERE CustomerID = {0};",
                 CustomerID
                 );
         }
 
         /* Static method to retrieve specified customer */
-        public static CassandraCustomer RetrieveCustomer(ICqlCommand cmd, int CustomerID)
+        public static NewSchemaCassandraCustomer RetrieveCustomer(ICqlCommand cmd, int CustomerID)
         {
             String selectCQL = GetSelectCQL(CustomerID);
             Console.WriteLine("Retrieving customer using raw CQL statement:\n{0}", selectCQL);
-            
-            return cmd.Execute<CassandraCustomer>(selectCQL)
+
+            return cmd.Execute<NewSchemaCassandraCustomer>(selectCQL)
                         .AsFuture().Result.First();
         }
 
@@ -66,9 +75,9 @@ namespace CassandraSharp_Client_Demo
         */
         public HashSet<String> AddressSet
         {
-            get { return new HashSet<String>(this.Addresses);  }
+            get { return new HashSet<String>(this.Addresses); }
             set { this.Addresses = value.ToList<String>(); }
         }
-    
+
     }
 }

@@ -67,7 +67,7 @@ namespace Shared.DemoRunner
                 {
                     if (response.ToUpper() != "Q")
                     {
-                        Console.WriteLine("\nERROR - Option not available.\n");
+                        Console.WriteLine("\nERROR - Option not available.");
                     }
                 }
 

@@ -9,7 +9,7 @@ namespace CassandraSharp_Client_Demo
     class Example1 : CassandraDemoExample
     {
 
-        public static void _runExample(ICqlCommand cmd)
+        private static void _runExample(ICqlCommand cmd)
         {
 
             // Create a customer in memory

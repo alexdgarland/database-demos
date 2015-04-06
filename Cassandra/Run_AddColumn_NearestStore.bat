@@ -1,0 +1,1 @@
+"%CASSANDRA_HOME%\bin\cqlsh" -f "%~dp0\AddColumn_NearestStore.cql"

@@ -15,7 +15,11 @@ namespace Shared.Customer
         public override string ToString()
         {
             return base.ToString()
-                + String.Format("\nNearest Store: {0}", this.NearestStore == "" ? this.NearestStore : "Not Known");
+                + String.Format
+                    (
+                    "\nNearest Store: {0}",
+                    (String.IsNullOrEmpty(this.NearestStore)) ?  "Not Known" : this.NearestStore
+                    );
         }
     
     }

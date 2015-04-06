@@ -25,6 +25,10 @@ namespace CassandraSharp_Client_Demo
             {
                 Console.WriteLine(e);
             }
+            finally
+            {
+                ClusterManager.Shutdown();
+            }
         }
 
     }
