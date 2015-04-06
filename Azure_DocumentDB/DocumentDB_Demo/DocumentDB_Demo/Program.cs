@@ -18,7 +18,10 @@ namespace DocumentDB_Demo
         {
 
             var runner = new DemoRunner("Azure Document DB");
-            runner.AddOption("1", "Demo of Azure Document DB", Example1.Run);
+
+            runner.AddOption("1", "Simple demo of saving object and retriving using various different methods.", Example1.Run);
+            runner.AddOption("2", "Demo of changing schema.", Example2.Run);
+            
             runner.Run();
 
         }
