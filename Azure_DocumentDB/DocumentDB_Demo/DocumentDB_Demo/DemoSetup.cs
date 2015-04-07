@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Xml.Linq;
+using System.IO;
 
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
@@ -28,8 +29,16 @@ namespace DocumentDB_Demo
         public static DocumentClient GetClient()
         {
             String homePath = Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
-            
-            var document = XDocument.Load(homePath + "\\DocumentDB_Demo.config");
+            String configFilePath = homePath + "\\DocumentDB_Demo.config";
+
+            if (!File.Exists(configFilePath))
+            {
+                Console.WriteLine("ERROR: Azure config file not available.");
+                Console.WriteLine("Please see code comment in DemoSetup.cs for details of requirement.\n");
+                System.Environment.Exit(1);
+            }
+
+            var document = XDocument.Load(configFilePath);
             
             String endpointURL = document.Descendants("endpointURL").Single<XElement>().Value;
             String authKey = document.Descendants("authKey").Single<XElement>().Value;
