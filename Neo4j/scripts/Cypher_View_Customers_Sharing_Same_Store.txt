@@ -1,0 +1,1 @@
+MATCH (c1:Customer)-[:NEAREST_STORE_IS]->(s:Store)<-[:NEAREST_STORE_IS]-(c2:Customer) RETURN c1, c2, s;

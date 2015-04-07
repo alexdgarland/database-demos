@@ -18,17 +18,12 @@ namespace Neo4j_Client_Demo
             this.NearestStore = NearestStore;
         }
 
-        
-        //// Private inner class, just for deserialising Store nodes from Cypher queries as part of "SaveToGraph" method
-        //private class Neo4jStore { public String Name; }
-
+        public Neo4jCustomer() { }      // MUST have a default constructor to use for deserialisation from Neo4j
 
         public void SaveToGraph(GraphClient client)
         {
-            // Save the customer details to Neo4j.
-            // We could combine some of these Cypher queries for greater efficiency,
-            // but let's keep them separate so as to stay simple for demo purposes:
-
+            // Save customer details to Neo4j.
+            // We could combine some of these Cypher queries for efficiency, but let's keep things simple for demo purposes:
 
             // Merge in the associated store so we know it exists once and only once in the graph
             client.Cypher
@@ -51,7 +46,7 @@ namespace Neo4j_Client_Demo
                 .WithParam("storeNameParam", this.NearestStore)
                 .CreateUnique("customer-[:NEAREST_STORE_IS]->store")
                 .ExecuteWithoutResults();
-            // In a real system, if updating customers we would also want to delete possible outdated links to "NearestStore"
+            // In a real system, if updating customers we would also want to delete possible outdated links to a "NearestStore"
             // if this link might have changed - but can leave that out for now.
 
         }
