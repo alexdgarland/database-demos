@@ -1,4 +1,5 @@
 *** Riak Demo Environment Set-Up ***
+
 These notes are pretty scrappy at the moment and are mainly for my own benefit to keep track of the various steps required.  However, I may try and document the install process in greater detail (and possibly even get it scripted) as and when I have time
 
 ON LINUX VM (SERVER):
