@@ -1,0 +1,8 @@
+
+MATCH
+    (cust:Customer)-[:SHOPS_AT]->(:Store{branch:'Leeds'})-[:LOCATED_IN*1..4]->(c_str:County),
+        (cust)-[:LIVES_IN]->()-[:LOCATED_IN*0..3]->(city:City)-[:LOCATED_IN]->(c_cust:County)
+WHERE   c_str <> c_cust
+WITH    city, COUNT(*) AS CustomerCount
+ORDER BY    COUNT(*) DESC
+RETURN city, CustomerCount LIMIT 10;
