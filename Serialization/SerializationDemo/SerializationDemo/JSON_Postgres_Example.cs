@@ -65,7 +65,7 @@ namespace SerializationDemo
                 using (var command = new NpgsqlCommand("SELECT object FROM public.customer WHERE customer_id = :idparam;", conn))
                 {
                     command.Parameters.Add(new NpgsqlParameter("idparam", NpgsqlDbType.Integer));
-                    command.Parameters[0].Value = c1.CustomerID;
+                    command.Parameters[0].Value = savedCustomerId;
                     retrievedJson = (String)command.ExecuteScalar();
                 }
 
