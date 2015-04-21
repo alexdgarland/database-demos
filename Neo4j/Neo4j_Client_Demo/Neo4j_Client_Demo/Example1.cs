@@ -17,9 +17,9 @@ namespace Neo4j_Client_Demo
 
             // Create some customers
 
-            var Customer1 = new Neo4jCustomer(1, " Customer 1", "Leeds");
-            var Customer2 = new Neo4jCustomer(2, " Customer 2", "York");
-            var Customer3 = new Neo4jCustomer(3, " Customer 3", "Leeds");
+            var Customer1 = new Neo4jCustomer(1, "Customer 1", "Leeds");
+            var Customer2 = new Neo4jCustomer(2, "Customer 2", "York");
+            var Customer3 = new Neo4jCustomer(3, "Customer 3", "Leeds");
 
             // Save them to Neo4j
 
