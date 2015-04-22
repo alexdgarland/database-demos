@@ -1,6 +1,7 @@
 ﻿using System;
 
-// http://www.newtonsoft.com/json/help/html/SerializingJSON.htm , "Install-Package Newtonsoft.Json" - popular option but there are others ...
+// http://www.newtonsoft.com/json/help/html/SerializingJSON.htm , "Install-Package Newtonsoft.Json"
+// Popular option but there are others ...
 using Newtonsoft.Json;
 
 using Npgsql;       // Postgres driver for .NET - API is very close to that of System.Data.SqlClient
