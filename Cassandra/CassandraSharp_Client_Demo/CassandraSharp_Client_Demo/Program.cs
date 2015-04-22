@@ -12,8 +12,7 @@ namespace CassandraSharp_Client_Demo
             var runner = new DemoRunner("Cassandra (CassandraSharp Client)");
             
             runner.AddOption("1", "Basic demo of saving, retrieving and updating objects.", Example1.Run);
-            runner.AddOption("2", "Demo of changes to object schema.", Example2.Run);
-
+            
             runner.Run();
             
         }
