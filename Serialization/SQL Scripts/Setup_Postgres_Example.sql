@@ -1,5 +1,7 @@
 
-CREATE TABLE customer
+DROP TABLE IF EXISTS public.customer;
+
+CREATE TABLE public.customer
 (
   customer_id integer NOT NULL,
   object json,
