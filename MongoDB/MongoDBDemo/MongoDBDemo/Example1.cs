@@ -19,6 +19,7 @@ namespace MongoDBDemo
 
             var collection = database.GetCollection<MongoDBCustomer>("Customers");     // Connect to customer collection
 
+
             // Create a customer in memory
 
             MongoDBCustomer c1 = Customer.GetDefault<MongoDBCustomer>();
@@ -27,8 +28,6 @@ namespace MongoDBDemo
 
 
             // Automaticaly serialize the customer to MongoDB.
-            // In this case, it picks up the fact that we have an "Id" field on the customer;
-            // we can also get it to auto-allocate and return IDs using collection.Insert.
 
             collection.Save(c1);
 
@@ -44,7 +43,7 @@ namespace MongoDBDemo
 
             String newAddress = "25 Some Avenue, Some Town, Somewhere, PO5 CD3";
             var update = Update<MongoDBCustomer>.AddToSet<String>(c => c.Addresses, newAddress);
-            collection.Update(query, update);               // Note, we can use the same query object to locate our customer record
+            collection.Update(query, update);
 
 
             // Retrieve another copy of the customer with update applied - let's try it with LINQ this time

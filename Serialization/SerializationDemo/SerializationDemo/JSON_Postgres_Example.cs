@@ -28,6 +28,7 @@ namespace SerializationDemo
                 conn.Open();
 
                 Console.WriteLine("Saving to Postgres ...");
+                SaveCustomer(c1, conn);
                 Console.WriteLine("Done\n");
 
                 Console.WriteLine("Retrieving copy of customer from Postgres ...");

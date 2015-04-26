@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
-using MongoDB.Driver.Linq;
 
 using Shared.Customer;
 
