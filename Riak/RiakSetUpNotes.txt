@@ -18,7 +18,10 @@ Note that at this stage the installing user already needs to have root or extens
 
 4) Install Riak dev cluster as per Basho instructions.
 
-5) Increase upper limit for file handles for user who will run nodes (in config file - check which - probably need to document this further).
+5) Avoid warnings by increasing upper limit for file handles for user who will run nodes - on Centos this is done by adding the following lines to /etc/security/limits.conf:
+	
+	*		soft	nofile		4096
+	*		hard	nofile		4096
 
 6) Start all nodes (script is provided in GitHub repo under Riak/server/SetUp/).
 
