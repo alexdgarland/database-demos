@@ -23,6 +23,7 @@ namespace DocumentDB_Demo
             DocumentCollection collection = DemoSetup.GetCollection(client, database, "CustomerCollection");
 
 
+
             // Create a customer in memory
 
             DocumentDBCustomer c1 = Customer.GetDefault<DocumentDBCustomer>();
@@ -30,6 +31,7 @@ namespace DocumentDB_Demo
             /* Keep a record of the customer's ID and name for use in demo queries */
             int savedCustomerId = c1.CustomerID;
             String savedCustomerName = c1.Name;
+
 
 
             // Save the customer to DocumentDB.  Note that unlike (e.g.) MongoDB, Riak, creating a document is not idempotent.

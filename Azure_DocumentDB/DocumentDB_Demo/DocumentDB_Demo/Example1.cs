@@ -32,9 +32,10 @@ namespace DocumentDB_Demo
             String savedCustomerName = c1.Name;
 
 
+
             // Save the customer to DocumentDB.  Note that unlike (e.g.) MongoDB, Riak, creating a document is not idempotent.
             // If a document may exist already, we need to check for it and delete/ update.
-            // This extra level of safety/ overhead mat or may not be desirable.
+            // This extra level of safety/ overhead may or may not be desirable.
 
             Document document = client.CreateDocumentQuery(collection.DocumentsLink)
                                         .Where(d => d.Id == savedCustomerId.ToString())
@@ -47,6 +48,7 @@ namespace DocumentDB_Demo
                                         disableAutomaticIdGeneration: true);    /* Control our own document IDs; DocumentDB can also auto-create. */
                 
 
+
             // Retrieve the customer details into a new customer object using SQL query (on Document ID/ key)
 
             String sqlQuery = String.Format("SELECT * FROM Customers c WHERE c.id = '{0}'", savedCustomerId);
@@ -56,12 +58,14 @@ namespace DocumentDB_Demo
             Console.WriteLine(String.Format("\nCustomer retrieved using SQL:\n\n{0}\n", c2.ToString()));
 
 
+
             // Retrieve the customer details into a new customer object using LINQ (on Document ID/ key)
 
             DocumentDBCustomer c3 = client.CreateDocumentQuery<DocumentDBCustomer>(collection.DocumentsLink)
                                             .Where(c => c.id == savedCustomerId.ToString())
                                             .AsEnumerable().FirstOrDefault();
             Console.WriteLine(String.Format("\nCustomer retrieved using LINQ:\n\n{0}\n", c3.ToString()));
+
 
 
             // Query on something other than the key field - would advise some awareness of possible indexing/ performance implications!
