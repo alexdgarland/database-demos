@@ -1,4 +1,4 @@
-database-demos
+Database Demos
 ==============
 
 Code examples, slides etc. for my presentation <b>"Not Only SQL - Picking A Database For .NET"</b>, which explores the theory and practice of using various relational and NoSQL options for data persistence, with a focus on the point-of-view of developers using C# and related Microsoft technologues.
