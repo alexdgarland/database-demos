@@ -6,11 +6,10 @@
 scriptdir=$(dirname ${BASH_SOURCE[0]})
 
 # Grab Cloudera repo
-startdir=$(pwd)
-cd /etc/yum.repos.d
+pushd /etc/yum.repos.d
 sudo wget http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/cloudera-cdh4.repo
 sudo rpm --import http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/RPM-GPG-KEY-cloudera
-cd $startdir
+popd
 
 # Install with single-node config
 sudo yum install hadoop-0.20-conf-pseudo
